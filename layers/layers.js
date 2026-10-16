@@ -462,175 +462,56 @@ var lyr_usinas_foto_editado_15 = new ol.layer.Vector({
                 interactive: true,
                 title: '<img src="styles/legend/usinas_foto_editado_15.png" /> Usinas Fotovotaicas'
             });
-var format_CadastroAmbientalRuralCAR_16 = new ol.format.GeoJSON();
-var jsonSource_CadastroAmbientalRuralCAR_16 = new ol.source.Vector({
-    attributions: ' ',
-});
-var lyr_CadastroAmbientalRuralCAR_16 = new ol.layer.Vector({
-                declutter: false,
-                source:jsonSource_CadastroAmbientalRuralCAR_16, 
-                style: style_CadastroAmbientalRuralCAR_16,
-                popuplayertitle: 'Cadastro Ambiental Rural (CAR)',
-                interactive: true,
-                title: '<img src="styles/legend/CadastroAmbientalRuralCAR_16.png" /> Cadastro Ambiental Rural (CAR)'
-            });
-
-fetchWFSCadastroAmbientalRuralCAR_16Data(lyr_CadastroAmbientalRuralCAR_16.get('title'), function (error, response) {
-    var features_CadastroAmbientalRuralCAR_16;
-    try {
-        if (typeof response === "object" && !response.nodeType) {
-            // Case JSONP/GeoJSON
-            features_CadastroAmbientalRuralCAR_16 = format_CadastroAmbientalRuralCAR_16.readFeatures(response);
-        } else {
-            // Case XML string o DOM
-            var parser = new DOMParser();
-            var xmlDoc = (typeof response === "string")
-                ? parser.parseFromString(response, "text/xml")
-                : response;
-
-            // Find GML version from tags
-            var gmlFormat;
-            if (xmlDoc.getElementsByTagName("gml:featureMember").length > 0) {
-                // GML2
-                gmlFormat = new ol.format.GML2();
-            } else if (xmlDoc.getElementsByTagName("gml:featureMembers").length > 0 ||
-                    xmlDoc.getElementsByTagName("gml:FeatureCollection").length > 0) {
-                // GML3
-                gmlFormat = new ol.format.GML3();
-            } else {
-                // Fallback generico
-                gmlFormat = new ol.format.WFS();
-            }
-
-            features_CadastroAmbientalRuralCAR_16 = gmlFormat.readFeatures(xmlDoc, {
-                dataProjection: 'EPSG:3857',
-                featureProjection: map.getView().getProjection()
-            });
+var lyr_CadastroAmbientalRuralCAR_16 = new ol.layer.Tile({
+    source: new ol.source.TileWMS({
+        url: "https://geoserver-sigweb.duckdns.org/geoserver/wms",
+        attributions: ' ',
+        params: {
+            "LAYERS": "sigweb:Cadastro_Ambiental_Rural", 
+            "TILED": "true",
+            "VERSION": "1.3.0"
         }
-
-        if (features_CadastroAmbientalRuralCAR_16 && features_CadastroAmbientalRuralCAR_16.length > 0) {
-            jsonSource_CadastroAmbientalRuralCAR_16.addFeatures(features_CadastroAmbientalRuralCAR_16);
-        } else {
-            lyr_CadastroAmbientalRuralCAR_16.set('title', '<i class="fa-regular fa-triangle-exclamation" title="Parsing Error"></i> ' + lyr_CadastroAmbientalRuralCAR_16.get('title'));
-            console.warn("No features loaded for CadastroAmbientalRuralCAR_16");
+    }),
+    title: '<img src="styles/legend/CadastroAmbientalRuralCAR_16.png" /> Cadastro Ambiental Rural (CAR)',
+    popuplayertitle: 'Cadastro Ambiental Rural (CAR)',
+    type: '',
+    opacity: 1.000000
+});
+wms_layers.push([lyr_CadastroAmbientalRuralCAR_16, 1]);
+var lyr_SistemadeGestoFundiriaSIGEF_17 = new ol.layer.Tile({
+    source: new ol.source.TileWMS({
+        url: "https://geoserver-sigweb.duckdns.org/geoserver/wms",
+        attributions: ' ',
+        params: {
+            "LAYERS": "sigweb:Sistema_de_Gestao_Fundiaria", 
+            "TILED": "true",
+            "VERSION": "1.3.0"
         }
-    } catch (e) {
-        console.error("Error parsing WFS for CadastroAmbientalRuralCAR_16:", e);
-    }
+    }),
+    title: '<img src="styles/legend/SistemadeGestoFundiriaSIGEF_17.png" /> Sistema de Gestão Fundiária (SIGEF)',
+    popuplayertitle: 'Sistema de Gestão Fundiária (SIGEF)',
+    type: '',
+    opacity: 1.000000
 });
-var format_SistemadeGestoFundiriaSIGEF_17 = new ol.format.GeoJSON();
-var jsonSource_SistemadeGestoFundiriaSIGEF_17 = new ol.source.Vector({
-    attributions: ' ',
-});
-var lyr_SistemadeGestoFundiriaSIGEF_17 = new ol.layer.Vector({
-                declutter: false,
-                source:jsonSource_SistemadeGestoFundiriaSIGEF_17, 
-                style: style_SistemadeGestoFundiriaSIGEF_17,
-                popuplayertitle: 'Sistema de Gestão Fundiária (SIGEF)',
-                interactive: true,
-                title: '<img src="styles/legend/SistemadeGestoFundiriaSIGEF_17.png" /> Sistema de Gestão Fundiária (SIGEF)'
-            });
-
-fetchWFSSistemadeGestoFundiriaSIGEF_17Data(lyr_SistemadeGestoFundiriaSIGEF_17.get('title'), function (error, response) {
-    var features_SistemadeGestoFundiriaSIGEF_17;
-    try {
-        if (typeof response === "object" && !response.nodeType) {
-            // Case JSONP/GeoJSON
-            features_SistemadeGestoFundiriaSIGEF_17 = format_SistemadeGestoFundiriaSIGEF_17.readFeatures(response);
-        } else {
-            // Case XML string o DOM
-            var parser = new DOMParser();
-            var xmlDoc = (typeof response === "string")
-                ? parser.parseFromString(response, "text/xml")
-                : response;
-
-            // Find GML version from tags
-            var gmlFormat;
-            if (xmlDoc.getElementsByTagName("gml:featureMember").length > 0) {
-                // GML2
-                gmlFormat = new ol.format.GML2();
-            } else if (xmlDoc.getElementsByTagName("gml:featureMembers").length > 0 ||
-                    xmlDoc.getElementsByTagName("gml:FeatureCollection").length > 0) {
-                // GML3
-                gmlFormat = new ol.format.GML3();
-            } else {
-                // Fallback generico
-                gmlFormat = new ol.format.WFS();
-            }
-
-            features_SistemadeGestoFundiriaSIGEF_17 = gmlFormat.readFeatures(xmlDoc, {
-                dataProjection: 'EPSG:3857',
-                featureProjection: map.getView().getProjection()
-            });
+wms_layers.push([lyr_SistemadeGestoFundiriaSIGEF_17, 1]);
+var lyr_BiomasMAPBIOMAS_18 = new ol.layer.Tile({
+    source: new ol.source.TileWMS({
+        url: "https://geoserver-sigweb.duckdns.org/geoserver/wms",
+        attributions: ' ',
+        params: {
+            "LAYERS": "sigweb:Biomas_mapbiomas", // confira o nome exato da camada no GeoServer
+            "TILED": "true",
+            "VERSION": "1.3.0"
         }
-
-        if (features_SistemadeGestoFundiriaSIGEF_17 && features_SistemadeGestoFundiriaSIGEF_17.length > 0) {
-            jsonSource_SistemadeGestoFundiriaSIGEF_17.addFeatures(features_SistemadeGestoFundiriaSIGEF_17);
-        } else {
-            lyr_SistemadeGestoFundiriaSIGEF_17.set('title', '<i class="fa-regular fa-triangle-exclamation" title="Parsing Error"></i> ' + lyr_SistemadeGestoFundiriaSIGEF_17.get('title'));
-            console.warn("No features loaded for SistemadeGestoFundiriaSIGEF_17");
-        }
-    } catch (e) {
-        console.error("Error parsing WFS for SistemadeGestoFundiriaSIGEF_17:", e);
-    }
-});
-var format_BiomasMAPBIOMAS_18 = new ol.format.GeoJSON();
-var jsonSource_BiomasMAPBIOMAS_18 = new ol.source.Vector({
-    attributions: ' ',
-});
-var lyr_BiomasMAPBIOMAS_18 = new ol.layer.Vector({
-                declutter: false,
-                source:jsonSource_BiomasMAPBIOMAS_18, 
-                style: style_BiomasMAPBIOMAS_18,
-                popuplayertitle: 'Biomas (MAPBIOMAS)',
-                interactive: true,
+    }),
     title: 'Biomas (MAPBIOMAS)<br />\
     <img src="styles/legend/BiomasMAPBIOMAS_18_0.png" /> Caatinga<br />\
-    <img src="styles/legend/BiomasMAPBIOMAS_18_1.png" /> Cerrado<br />' });
-
-fetchWFSBiomasMAPBIOMAS_18Data(lyr_BiomasMAPBIOMAS_18.get('title'), function (error, response) {
-    var features_BiomasMAPBIOMAS_18;
-    try {
-        if (typeof response === "object" && !response.nodeType) {
-            // Case JSONP/GeoJSON
-            features_BiomasMAPBIOMAS_18 = format_BiomasMAPBIOMAS_18.readFeatures(response);
-        } else {
-            // Case XML string o DOM
-            var parser = new DOMParser();
-            var xmlDoc = (typeof response === "string")
-                ? parser.parseFromString(response, "text/xml")
-                : response;
-
-            // Find GML version from tags
-            var gmlFormat;
-            if (xmlDoc.getElementsByTagName("gml:featureMember").length > 0) {
-                // GML2
-                gmlFormat = new ol.format.GML2();
-            } else if (xmlDoc.getElementsByTagName("gml:featureMembers").length > 0 ||
-                    xmlDoc.getElementsByTagName("gml:FeatureCollection").length > 0) {
-                // GML3
-                gmlFormat = new ol.format.GML3();
-            } else {
-                // Fallback generico
-                gmlFormat = new ol.format.WFS();
-            }
-
-            features_BiomasMAPBIOMAS_18 = gmlFormat.readFeatures(xmlDoc, {
-                dataProjection: 'EPSG:3857',
-                featureProjection: map.getView().getProjection()
-            });
-        }
-
-        if (features_BiomasMAPBIOMAS_18 && features_BiomasMAPBIOMAS_18.length > 0) {
-            jsonSource_BiomasMAPBIOMAS_18.addFeatures(features_BiomasMAPBIOMAS_18);
-        } else {
-            lyr_BiomasMAPBIOMAS_18.set('title', '<i class="fa-regular fa-triangle-exclamation" title="Parsing Error"></i> ' + lyr_BiomasMAPBIOMAS_18.get('title'));
-            console.warn("No features loaded for BiomasMAPBIOMAS_18");
-        }
-    } catch (e) {
-        console.error("Error parsing WFS for BiomasMAPBIOMAS_18:", e);
-    }
+    <img src="styles/legend/BiomasMAPBIOMAS_18_1.png" /> Cerrado<br />',
+    popuplayertitle: 'Biomas (MAPBIOMAS)',
+    type: '',
+    opacity: 1.000000
 });
+wms_layers.push([lyr_BiomasMAPBIOMAS_18, 1]);
 var lyr_UsoeocupaodoSolo_19 = new ol.layer.Tile({
                             source: new ol.source.TileWMS(({
                               url: "https://geoserver-sigweb.duckdns.org/geoserver/wms",
@@ -677,16 +558,16 @@ var lyr_UsoeocupaodoSolo_19 = new ol.layer.Tile({
                             
                           });
               wms_layers.push([lyr_UsoeocupaodoSolo_19, 0]);
-var format_reasdeconservaoICMBio_20 = new ol.format.GeoJSON();
-var jsonSource_reasdeconservaoICMBio_20 = new ol.source.Vector({
-    attributions: ' ',
-});
-var lyr_reasdeconservaoICMBio_20 = new ol.layer.Vector({
-                declutter: false,
-                source:jsonSource_reasdeconservaoICMBio_20, 
-                style: style_reasdeconservaoICMBio_20,
-                popuplayertitle: 'Áreas de conservação (ICMBio)',
-                interactive: true,
+var lyr_reasdeconservaoICMBio_20 = new ol.layer.Tile({
+    source: new ol.source.TileWMS({
+        url: "https://geoserver-sigweb.duckdns.org/geoserver/wms",
+        attributions: ' ',
+        params: {
+            "LAYERS": "sigweb:areas_de_conservacao", // confira o nome exato da camada no GeoServer
+            "TILED": "true",
+            "VERSION": "1.3.0"
+        }
+    }),
     title: 'Áreas de conservação (ICMBio)<br />\
     <img src="styles/legend/reasdeconservaoICMBio_20_0.png" /> ESTAÇÃO ECOLÓGICA DE URUÇUÍ - UNA<br />\
     <img src="styles/legend/reasdeconservaoICMBio_20_1.png" /> FLORESTA NACIONAL DE PALMARES<br />\
@@ -698,51 +579,12 @@ var lyr_reasdeconservaoICMBio_20 = new ol.layer.Vector({
     <img src="styles/legend/reasdeconservaoICMBio_20_7.png" /> ÁREA DE PROTEÇÃO AMBIENTAL DA CHAPADA DO ARARIPE<br />\
     <img src="styles/legend/reasdeconservaoICMBio_20_8.png" /> ÁREA DE PROTEÇÃO AMBIENTAL DELTA DO PARNAÍBA<br />\
     <img src="styles/legend/reasdeconservaoICMBio_20_9.png" /> ÁREA DE PROTEÇÃO AMBIENTAL SERRA DA IBIAPABA<br />\
-    <img src="styles/legend/reasdeconservaoICMBio_20_10.png" /> ÁREA DE PROTEÇÃO AMBIENTAL SERRA DA TABATINGA<br />' });
-
-fetchWFSreasdeconservaoICMBio_20Data(lyr_reasdeconservaoICMBio_20.get('title'), function (error, response) {
-    var features_reasdeconservaoICMBio_20;
-    try {
-        if (typeof response === "object" && !response.nodeType) {
-            // Case JSONP/GeoJSON
-            features_reasdeconservaoICMBio_20 = format_reasdeconservaoICMBio_20.readFeatures(response);
-        } else {
-            // Case XML string o DOM
-            var parser = new DOMParser();
-            var xmlDoc = (typeof response === "string")
-                ? parser.parseFromString(response, "text/xml")
-                : response;
-
-            // Find GML version from tags
-            var gmlFormat;
-            if (xmlDoc.getElementsByTagName("gml:featureMember").length > 0) {
-                // GML2
-                gmlFormat = new ol.format.GML2();
-            } else if (xmlDoc.getElementsByTagName("gml:featureMembers").length > 0 ||
-                    xmlDoc.getElementsByTagName("gml:FeatureCollection").length > 0) {
-                // GML3
-                gmlFormat = new ol.format.GML3();
-            } else {
-                // Fallback generico
-                gmlFormat = new ol.format.WFS();
-            }
-
-            features_reasdeconservaoICMBio_20 = gmlFormat.readFeatures(xmlDoc, {
-                dataProjection: 'EPSG:3857',
-                featureProjection: map.getView().getProjection()
-            });
-        }
-
-        if (features_reasdeconservaoICMBio_20 && features_reasdeconservaoICMBio_20.length > 0) {
-            jsonSource_reasdeconservaoICMBio_20.addFeatures(features_reasdeconservaoICMBio_20);
-        } else {
-            lyr_reasdeconservaoICMBio_20.set('title', '<i class="fa-regular fa-triangle-exclamation" title="Parsing Error"></i> ' + lyr_reasdeconservaoICMBio_20.get('title'));
-            console.warn("No features loaded for reasdeconservaoICMBio_20");
-        }
-    } catch (e) {
-        console.error("Error parsing WFS for reasdeconservaoICMBio_20:", e);
-    }
+    <img src="styles/legend/reasdeconservaoICMBio_20_10.png" /> ÁREA DE PROTEÇÃO AMBIENTAL SERRA DA TABATINGA<br />',
+    popuplayertitle: 'Áreas de conservação (ICMBio)',
+    type: '',
+    opacity: 1.000000
 });
+wms_layers.push([lyr_reasdeconservaoICMBio_20, 1]);
 var lyr_DeclividadeSRTM_21 = new ol.layer.Tile({
                             source: new ol.source.TileWMS(({
                               url: "https://geoserver-sigweb.duckdns.org/geoserver/wms",
@@ -766,62 +608,22 @@ var lyr_DeclividadeSRTM_21 = new ol.layer.Tile({
                             
                           });
               wms_layers.push([lyr_DeclividadeSRTM_21, 0]);
-var format_RedeHidrogrficaANA_22 = new ol.format.GeoJSON();
-var jsonSource_RedeHidrogrficaANA_22 = new ol.source.Vector({
-    attributions: ' ',
-});
-var lyr_RedeHidrogrficaANA_22 = new ol.layer.Vector({
-                declutter: false,
-                source:jsonSource_RedeHidrogrficaANA_22, 
-                style: style_RedeHidrogrficaANA_22,
-                popuplayertitle: 'Rede Hidrográfica (ANA)',
-                interactive: true,
-                title: '<img src="styles/legend/RedeHidrogrficaANA_22.png" /> Rede Hidrográfica (ANA)'
-            });
-
-fetchWFSRedeHidrogrficaANA_22Data(lyr_RedeHidrogrficaANA_22.get('title'), function (error, response) {
-    var features_RedeHidrogrficaANA_22;
-    try {
-        if (typeof response === "object" && !response.nodeType) {
-            // Case JSONP/GeoJSON
-            features_RedeHidrogrficaANA_22 = format_RedeHidrogrficaANA_22.readFeatures(response);
-        } else {
-            // Case XML string o DOM
-            var parser = new DOMParser();
-            var xmlDoc = (typeof response === "string")
-                ? parser.parseFromString(response, "text/xml")
-                : response;
-
-            // Find GML version from tags
-            var gmlFormat;
-            if (xmlDoc.getElementsByTagName("gml:featureMember").length > 0) {
-                // GML2
-                gmlFormat = new ol.format.GML2();
-            } else if (xmlDoc.getElementsByTagName("gml:featureMembers").length > 0 ||
-                    xmlDoc.getElementsByTagName("gml:FeatureCollection").length > 0) {
-                // GML3
-                gmlFormat = new ol.format.GML3();
-            } else {
-                // Fallback generico
-                gmlFormat = new ol.format.WFS();
-            }
-
-            features_RedeHidrogrficaANA_22 = gmlFormat.readFeatures(xmlDoc, {
-                dataProjection: 'EPSG:3857',
-                featureProjection: map.getView().getProjection()
-            });
+var lyr_RedeHidrogrficaANA_22 = new ol.layer.Tile({
+    source: new ol.source.TileWMS({
+        url: "https://geoserver-sigweb.duckdns.org/geoserver/wms",
+        attributions: ' ',
+        params: {
+            "LAYERS": "sigweb:rede_hidrografica",
+            "TILED": "true",
+            "VERSION": "1.3.0"
         }
-
-        if (features_RedeHidrogrficaANA_22 && features_RedeHidrogrficaANA_22.length > 0) {
-            jsonSource_RedeHidrogrficaANA_22.addFeatures(features_RedeHidrogrficaANA_22);
-        } else {
-            lyr_RedeHidrogrficaANA_22.set('title', '<i class="fa-regular fa-triangle-exclamation" title="Parsing Error"></i> ' + lyr_RedeHidrogrficaANA_22.get('title'));
-            console.warn("No features loaded for RedeHidrogrficaANA_22");
-        }
-    } catch (e) {
-        console.error("Error parsing WFS for RedeHidrogrficaANA_22:", e);
-    }
+    }),
+    title: '<img src="styles/legend/RedeHidrogrficaANA_22.png" /> Rede Hidrográfica (ANA)',
+    popuplayertitle: 'Rede Hidrográfica (ANA)',
+    type: '',
+    opacity: 1.000000
 });
+wms_layers.push([lyr_RedeHidrogrficaANA_22, 1]);
 var lyr_Precipitaoacumulada2025CHIRPS_23 = new ol.layer.Tile({
                             source: new ol.source.TileWMS(({
                               url: "https://geoserver-sigweb.duckdns.org/geoserver/wms",
@@ -920,174 +722,54 @@ var lyr_TemperaturaMdiaanual2025_26 = new ol.layer.Tile({
                             
                           });
               wms_layers.push([lyr_TemperaturaMdiaanual2025_26, 0]);
-var format_Piau_27 = new ol.format.GeoJSON();
-var jsonSource_Piau_27 = new ol.source.Vector({
-    attributions: ' ',
-});
-var lyr_Piau_27 = new ol.layer.Vector({
-                declutter: false,
-                source:jsonSource_Piau_27, 
-                style: style_Piau_27,
-                popuplayertitle: 'Piauí',
-                interactive: false,
-                title: '<img src="styles/legend/Piau_27.png" /> Piauí'
-            });
-
-fetchWFSPiau_27Data(lyr_Piau_27.get('title'), function (error, response) {
-    var features_Piau_27;
-    try {
-        if (typeof response === "object" && !response.nodeType) {
-            // Case JSONP/GeoJSON
-            features_Piau_27 = format_Piau_27.readFeatures(response);
-        } else {
-            // Case XML string o DOM
-            var parser = new DOMParser();
-            var xmlDoc = (typeof response === "string")
-                ? parser.parseFromString(response, "text/xml")
-                : response;
-
-            // Find GML version from tags
-            var gmlFormat;
-            if (xmlDoc.getElementsByTagName("gml:featureMember").length > 0) {
-                // GML2
-                gmlFormat = new ol.format.GML2();
-            } else if (xmlDoc.getElementsByTagName("gml:featureMembers").length > 0 ||
-                    xmlDoc.getElementsByTagName("gml:FeatureCollection").length > 0) {
-                // GML3
-                gmlFormat = new ol.format.GML3();
-            } else {
-                // Fallback generico
-                gmlFormat = new ol.format.WFS();
-            }
-
-            features_Piau_27 = gmlFormat.readFeatures(xmlDoc, {
-                dataProjection: 'EPSG:3857',
-                featureProjection: map.getView().getProjection()
-            });
+var lyr_Piau_27 = new ol.layer.Tile({
+    source: new ol.source.TileWMS({
+        url: "https://geoserver-sigweb.duckdns.org/geoserver/wms",
+        attributions: ' ',
+        params: {
+            "LAYERS": "sigweb:piauí", 
+            "TILED": "true",
+            "VERSION": "1.3.0"
         }
-
-        if (features_Piau_27 && features_Piau_27.length > 0) {
-            jsonSource_Piau_27.addFeatures(features_Piau_27);
-        } else {
-            lyr_Piau_27.set('title', '<i class="fa-regular fa-triangle-exclamation" title="Parsing Error"></i> ' + lyr_Piau_27.get('title'));
-            console.warn("No features loaded for Piau_27");
-        }
-    } catch (e) {
-        console.error("Error parsing WFS for Piau_27:", e);
-    }
+    }),
+    title: '<img src="styles/legend/Piau_27.png" /> Piauí',
+    popuplayertitle: 'Piauí',
+    type: '',
+    opacity: 1.000000
 });
-var format_MunicpiosPiau_28 = new ol.format.GeoJSON();
-var jsonSource_MunicpiosPiau_28 = new ol.source.Vector({
-    attributions: ' ',
-});
-var lyr_MunicpiosPiau_28 = new ol.layer.Vector({
-                declutter: false,
-                source:jsonSource_MunicpiosPiau_28, 
-                style: style_MunicpiosPiau_28,
-                popuplayertitle: 'Municípios Piauí',
-                interactive: true,
-                title: '<img src="styles/legend/MunicpiosPiau_28.png" /> Municípios Piauí'
-            });
-
-fetchWFSMunicpiosPiau_28Data(lyr_MunicpiosPiau_28.get('title'), function (error, response) {
-    var features_MunicpiosPiau_28;
-    try {
-        if (typeof response === "object" && !response.nodeType) {
-            // Case JSONP/GeoJSON
-            features_MunicpiosPiau_28 = format_MunicpiosPiau_28.readFeatures(response);
-        } else {
-            // Case XML string o DOM
-            var parser = new DOMParser();
-            var xmlDoc = (typeof response === "string")
-                ? parser.parseFromString(response, "text/xml")
-                : response;
-
-            // Find GML version from tags
-            var gmlFormat;
-            if (xmlDoc.getElementsByTagName("gml:featureMember").length > 0) {
-                // GML2
-                gmlFormat = new ol.format.GML2();
-            } else if (xmlDoc.getElementsByTagName("gml:featureMembers").length > 0 ||
-                    xmlDoc.getElementsByTagName("gml:FeatureCollection").length > 0) {
-                // GML3
-                gmlFormat = new ol.format.GML3();
-            } else {
-                // Fallback generico
-                gmlFormat = new ol.format.WFS();
-            }
-
-            features_MunicpiosPiau_28 = gmlFormat.readFeatures(xmlDoc, {
-                dataProjection: 'EPSG:3857',
-                featureProjection: map.getView().getProjection()
-            });
+wms_layers.push([lyr_Piau_27, 0]);
+var lyr_MunicpiosPiau_28 = new ol.layer.Tile({
+    source: new ol.source.TileWMS({
+        url: "https://geoserver-sigweb.duckdns.org/geoserver/wms",
+        attributions: ' ',
+        params: {
+            "LAYERS": "sigweb:Municipios_do_Piaui",
+            "TILED": "true",
+            "VERSION": "1.3.0"
         }
-
-        if (features_MunicpiosPiau_28 && features_MunicpiosPiau_28.length > 0) {
-            jsonSource_MunicpiosPiau_28.addFeatures(features_MunicpiosPiau_28);
-        } else {
-            lyr_MunicpiosPiau_28.set('title', '<i class="fa-regular fa-triangle-exclamation" title="Parsing Error"></i> ' + lyr_MunicpiosPiau_28.get('title'));
-            console.warn("No features loaded for MunicpiosPiau_28");
-        }
-    } catch (e) {
-        console.error("Error parsing WFS for MunicpiosPiau_28:", e);
-    }
+    }),
+    title: '<img src="styles/legend/MunicpiosPiau_28.png" /> Municípios Piauí',
+    popuplayertitle: 'Municípios Piauí',
+    type: '',
+    opacity: 1.000000
 });
-var format_Brasil_29 = new ol.format.GeoJSON();
-var jsonSource_Brasil_29 = new ol.source.Vector({
-    attributions: ' ',
-});
-var lyr_Brasil_29 = new ol.layer.Vector({
-                declutter: false,
-                source:jsonSource_Brasil_29, 
-                style: style_Brasil_29,
-                popuplayertitle: 'Brasil',
-                interactive: false,
-                title: '<img src="styles/legend/Brasil_29.png" /> Brasil'
-            });
-
-fetchWFSBrasil_29Data(lyr_Brasil_29.get('title'), function (error, response) {
-    var features_Brasil_29;
-    try {
-        if (typeof response === "object" && !response.nodeType) {
-            // Case JSONP/GeoJSON
-            features_Brasil_29 = format_Brasil_29.readFeatures(response);
-        } else {
-            // Case XML string o DOM
-            var parser = new DOMParser();
-            var xmlDoc = (typeof response === "string")
-                ? parser.parseFromString(response, "text/xml")
-                : response;
-
-            // Find GML version from tags
-            var gmlFormat;
-            if (xmlDoc.getElementsByTagName("gml:featureMember").length > 0) {
-                // GML2
-                gmlFormat = new ol.format.GML2();
-            } else if (xmlDoc.getElementsByTagName("gml:featureMembers").length > 0 ||
-                    xmlDoc.getElementsByTagName("gml:FeatureCollection").length > 0) {
-                // GML3
-                gmlFormat = new ol.format.GML3();
-            } else {
-                // Fallback generico
-                gmlFormat = new ol.format.WFS();
-            }
-
-            features_Brasil_29 = gmlFormat.readFeatures(xmlDoc, {
-                dataProjection: 'EPSG:3857',
-                featureProjection: map.getView().getProjection()
-            });
+wms_layers.push([lyr_MunicpiosPiau_28, 1]);
+var lyr_Brasil_29 = new ol.layer.Tile({
+    source: new ol.source.TileWMS({
+        url: "https://geoserver-sigweb.duckdns.org/geoserver/wms",
+        attributions: ' ',
+        params: {
+            "LAYERS": "sigweb:Brasil", 
+            "TILED": "true",
+            "VERSION": "1.3.0"
         }
-
-        if (features_Brasil_29 && features_Brasil_29.length > 0) {
-            jsonSource_Brasil_29.addFeatures(features_Brasil_29);
-        } else {
-            lyr_Brasil_29.set('title', '<i class="fa-regular fa-triangle-exclamation" title="Parsing Error"></i> ' + lyr_Brasil_29.get('title'));
-            console.warn("No features loaded for Brasil_29");
-        }
-    } catch (e) {
-        console.error("Error parsing WFS for Brasil_29:", e);
-    }
+    }),
+    title: '<img src="styles/legend/Brasil_29.png" /> Brasil',
+    popuplayertitle: 'Brasil',
+    type: '',
+    opacity: 1.000000
 });
+wms_layers.push([lyr_Brasil_29, 0]);
 var group_Limites = new ol.layer.Group({
                                 layers: [lyr_Piau_27,lyr_MunicpiosPiau_28,lyr_Brasil_29,],
                                 fold: 'close',
